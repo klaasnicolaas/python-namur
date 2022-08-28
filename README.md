@@ -43,6 +43,8 @@ You can read the following datasets with this package:
 
 ### Parking spaces
 
+You can use the following parameters in your request:
+
 - **limit** (default: 10) - How many results you want to retrieve.
 - **parking_type** (default: 1) - See the list below to find the corresponding number.
 
@@ -61,6 +63,8 @@ You can read the following datasets with this package:
 | Bus scolaire | 11 |
 | Borne électrique | 12 |
 | Réservé | 13 |
+
+You get the following output data back with this python package:
 
 | Variable | Type | Description |
 | :------- | :--- | :---------- |
