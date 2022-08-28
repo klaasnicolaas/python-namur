@@ -1,0 +1,14 @@
+{
+    "nhits": 0,
+    "parameters": {
+        "dataset": "namur-parking-emplacements",
+        "rows": 10,
+        "start": 0,
+        "refine": {
+            "type_parking": "no_parking"
+        },
+        "format": "json",
+        "timezone": "UTC"
+    },
+    "records": []
+}

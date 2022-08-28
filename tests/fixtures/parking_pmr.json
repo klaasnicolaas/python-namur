@@ -1,0 +1,396 @@
+{
+    "nhits": 305,
+    "parameters": {
+        "dataset": "namur-parking-emplacements",
+        "rows": 10,
+        "start": 0,
+        "refine": {
+            "type_parking": "PMR"
+        },
+        "format": "json",
+        "timezone": "UTC"
+    },
+    "records": [
+        {
+            "datasetid": "namur-parking-emplacements",
+            "recordid": "e91dc682c519dfe8fffce50919b56755b2eb1bac",
+            "fields": {
+                "geo_shape": {
+                    "coordinates": [
+                        4.87520726773486,
+                        50.46580805599107
+                    ],
+                    "type": "Point"
+                },
+                "largeur": 3.5,
+                "num_police": "2",
+                "rue_nom": "Place de l'Ecole des Cadets",
+                "localite": "NAMUR",
+                "type_parking": "PMR",
+                "zone_stationn": "Orange",
+                "code_rue": "1813",
+                "identifiant": "2172",
+                "date_creation": "2020-09-16",
+                "horaire": "Lundi au Samedi, de 9h à 17h - max. 8h",
+                "longueur": 5.0,
+                "distance_ptadresse": 9.9539280576,
+                "geo_point_2d": [
+                    50.46580805599107,
+                    4.87520726773486
+                ],
+                "superficie": 17.51
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    4.87520726773486,
+                    50.46580805599107
+                ]
+            },
+            "record_timestamp": "2022-08-28T01:10:00Z"
+        },
+        {
+            "datasetid": "namur-parking-emplacements",
+            "recordid": "17432e1f006f20ce4c2309210eb4af4cdde66c6f",
+            "fields": {
+                "geo_shape": {
+                    "coordinates": [
+                        4.868819424458087,
+                        50.46702277846857
+                    ],
+                    "type": "Point"
+                },
+                "largeur": 3.0,
+                "num_police": "16",
+                "rue_nom": "Rue Lucien Namêche",
+                "localite": "NAMUR",
+                "type_parking": "PMR",
+                "zone_stationn": "Rouge",
+                "code_rue": "1273",
+                "identifiant": "2529",
+                "date_creation": "2020-09-16",
+                "horaire": "Lundi au Samedi, de 9h à 17h - max. 3h",
+                "longueur": 4.88,
+                "distance_ptadresse": 16.59676176229,
+                "geo_point_2d": [
+                    50.46702277846857,
+                    4.868819424458087
+                ],
+                "superficie": 15.0
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    4.868819424458087,
+                    50.46702277846857
+                ]
+            },
+            "record_timestamp": "2022-08-28T01:10:00Z"
+        },
+        {
+            "datasetid": "namur-parking-emplacements",
+            "recordid": "7db6eddb0e8293b354c2ec55fb9efd385065c765",
+            "fields": {
+                "geo_shape": {
+                    "coordinates": [
+                        4.821362935779792,
+                        50.47341760702161
+                    ],
+                    "type": "Point"
+                },
+                "largeur": 2.31,
+                "num_police": "8",
+                "rue_nom": "Rue du Treizième de Ligne",
+                "localite": "BELGRADE",
+                "type_parking": "PMR",
+                "code_rue": "3269",
+                "identifiant": "14378",
+                "date_creation": "2020-09-16",
+                "longueur": 5.94,
+                "distance_ptadresse": 7.44149244227,
+                "geo_point_2d": [
+                    50.47341760702161,
+                    4.821362935779792
+                ],
+                "superficie": 13.88
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    4.821362935779792,
+                    50.47341760702161
+                ]
+            },
+            "record_timestamp": "2022-08-28T01:10:00Z"
+        },
+        {
+            "datasetid": "namur-parking-emplacements",
+            "recordid": "b6fba4658a68b7239b33399b695f6f6660ee83ba",
+            "fields": {
+                "geo_shape": {
+                    "coordinates": [
+                        4.87941976567549,
+                        50.4639856538556
+                    ],
+                    "type": "Point"
+                },
+                "largeur": 4.52,
+                "num_police": "1",
+                "rue_nom": "Rue Charles Lamquet",
+                "localite": "JAMBES",
+                "type_parking": "PMR",
+                "code_rue": "5607",
+                "identifiant": "15582",
+                "date_creation": "2020-09-16",
+                "longueur": 6.04,
+                "distance_ptadresse": 66.06902751104,
+                "geo_point_2d": [
+                    50.4639856538556,
+                    4.87941976567549
+                ],
+                "superficie": 27.47
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    4.87941976567549,
+                    50.4639856538556
+                ]
+            },
+            "record_timestamp": "2022-08-28T01:10:00Z"
+        },
+        {
+            "datasetid": "namur-parking-emplacements",
+            "recordid": "31d5e1d8298f6cf63efe064d6f09a801706940a1",
+            "fields": {
+                "geo_shape": {
+                    "coordinates": [
+                        4.877104301130791,
+                        50.46122805654307
+                    ],
+                    "type": "Point"
+                },
+                "largeur": 2.5,
+                "num_police": "34",
+                "rue_nom": "Place Joséphine Charlotte",
+                "localite": "JAMBES",
+                "type_parking": "PMR",
+                "zone_stationn": "Rouge",
+                "code_rue": "5521",
+                "identifiant": "15591",
+                "date_creation": "2020-09-16",
+                "horaire": "Lundi au Samedi, de 9h à 17h - max. 3h",
+                "longueur": 5.07,
+                "distance_ptadresse": 11.05171925906,
+                "geo_point_2d": [
+                    50.46122805654307,
+                    4.877104301130791
+                ],
+                "superficie": 9.97
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    4.877104301130791,
+                    50.46122805654307
+                ]
+            },
+            "record_timestamp": "2022-08-28T01:10:00Z"
+        },
+        {
+            "datasetid": "namur-parking-emplacements",
+            "recordid": "e53911f93460df0491d2ccfb3b5985d8de9566cd",
+            "fields": {
+                "geo_shape": {
+                    "coordinates": [
+                        4.896604222426458,
+                        50.4406149774601
+                    ],
+                    "type": "Point"
+                },
+                "largeur": 2.5,
+                "num_police": "5A",
+                "rue_nom": "Place Notre-Dame de la Paix",
+                "localite": "ERPENT",
+                "type_parking": "PMR",
+                "code_rue": "4837",
+                "identifiant": "15586",
+                "date_creation": "2020-09-16",
+                "longueur": 6.04,
+                "distance_ptadresse": 69.87650985179,
+                "geo_point_2d": [
+                    50.4406149774601,
+                    4.896604222426458
+                ],
+                "superficie": 15.15
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    4.896604222426458,
+                    50.4406149774601
+                ]
+            },
+            "record_timestamp": "2022-08-28T01:10:00Z"
+        },
+        {
+            "datasetid": "namur-parking-emplacements",
+            "recordid": "fa380b9dd226ee93413c3c60afa91bc969790a42",
+            "fields": {
+                "geo_shape": {
+                    "coordinates": [
+                        4.88408357144082,
+                        50.45869389215245
+                    ],
+                    "type": "Point"
+                },
+                "largeur": 2.08,
+                "num_police": "166",
+                "rue_nom": "Chaussée de Liège",
+                "localite": "JAMBES",
+                "type_parking": "PMR",
+                "code_rue": "5608",
+                "identifiant": "15590",
+                "date_creation": "2020-09-16",
+                "longueur": 6.0,
+                "distance_ptadresse": 3.32929221757,
+                "geo_point_2d": [
+                    50.45869389215245,
+                    4.88408357144082
+                ],
+                "superficie": 12.49
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    4.88408357144082,
+                    50.45869389215245
+                ]
+            },
+            "record_timestamp": "2022-08-28T01:10:00Z"
+        },
+        {
+            "datasetid": "namur-parking-emplacements",
+            "recordid": "5325d934280bacf8bf0d383fc23b5a79e1afcb80",
+            "fields": {
+                "geo_shape": {
+                    "coordinates": [
+                        4.877126555534669,
+                        50.461210614713515
+                    ],
+                    "type": "Point"
+                },
+                "largeur": 2.39,
+                "num_police": "34",
+                "rue_nom": "Place Joséphine Charlotte",
+                "localite": "JAMBES",
+                "type_parking": "PMR",
+                "zone_stationn": "Rouge",
+                "code_rue": "5521",
+                "identifiant": "15592",
+                "date_creation": "2020-09-16",
+                "horaire": "Lundi au Samedi, de 9h à 17h - max. 3h",
+                "longueur": 4.9,
+                "distance_ptadresse": 13.59126096752,
+                "geo_point_2d": [
+                    50.461210614713515,
+                    4.877126555534669
+                ],
+                "superficie": 9.21
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    4.877126555534669,
+                    50.461210614713515
+                ]
+            },
+            "record_timestamp": "2022-08-28T01:10:00Z"
+        },
+        {
+            "datasetid": "namur-parking-emplacements",
+            "recordid": "a9f3794952980ef00580e5e3e743b71b34e487b8",
+            "fields": {
+                "geo_shape": {
+                    "coordinates": [
+                        4.876987945585452,
+                        50.4624169952671
+                    ],
+                    "type": "Point"
+                },
+                "largeur": 1.83,
+                "num_police": "64",
+                "rue_nom": "Rue Commandant Tilot",
+                "localite": "JAMBES",
+                "type_parking": "PMR",
+                "code_rue": "5619",
+                "identifiant": "15594",
+                "date_creation": "2020-09-16",
+                "longueur": 6.01,
+                "distance_ptadresse": 3.10894678015,
+                "geo_point_2d": [
+                    50.4624169952671,
+                    4.876987945585452
+                ],
+                "superficie": 11.09
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    4.876987945585452,
+                    50.4624169952671
+                ]
+            },
+            "record_timestamp": "2022-08-28T01:10:00Z"
+        },
+        {
+            "datasetid": "namur-parking-emplacements",
+            "recordid": "4ed384df1741ecc0b097282e3ee6799223b4fc7c",
+            "fields": {
+                "geo_shape": {
+                    "coordinates": [
+                        4.837716682008543,
+                        50.47477032756567
+                    ],
+                    "type": "Point"
+                },
+                "largeur": 2.0,
+                "num_police": "13",
+                "rue_nom": "Rue du Bouquet",
+                "localite": "SAINT-SERVAIS",
+                "type_parking": "PMR",
+                "code_rue": "7404",
+                "identifiant": "14175",
+                "date_creation": "2020-09-16",
+                "longueur": 6.1,
+                "distance_ptadresse": 1.96976594961,
+                "geo_point_2d": [
+                    50.47477032756567,
+                    4.837716682008543
+                ],
+                "superficie": 12.19
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    4.837716682008543,
+                    50.47477032756567
+                ]
+            },
+            "record_timestamp": "2022-08-28T01:10:00Z"
+        }
+    ],
+    "facet_groups": [
+        {
+            "name": "type_parking",
+            "facets": [
+                {
+                    "name": "PMR",
+                    "count": 305,
+                    "state": "refined",
+                    "path": "PMR"
+                }
+            ]
+        }
+    ]
+}
