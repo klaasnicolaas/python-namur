@@ -44,7 +44,7 @@ You can read the following datasets with this package:
 ### Parking spaces
 
 - **limit** (default: 10) - How many results you want to retrieve.
-- **parking_type** (default: None) - See the list below to find the corresponding number.
+- **parking_type** (default: 1) - See the list below to find the corresponding number.
 
 | parking_type | number |
 | :--------------- | :--------: |
@@ -54,6 +54,13 @@ You can read the following datasets with this package:
 | Dépose-minute | 4 |
 | Livraison | 5 |
 | Police | 6 |
+| Taxi | 7 |
+| Car-sharing | 8 |
+| Recyclage | 9 |
+| Car | 10 |
+| Bus scolaire | 11 |
+| Borne électrique | 12 |
+| Réservé | 13 |
 
 | Variable | Type | Description |
 | :------- | :--- | :---------- |
@@ -62,8 +69,8 @@ You can read the following datasets with this package:
 | `street` | string | The street name where this parking spot is located |
 | `longitude` | float | The longitude of the parking spot |
 | `latitude` | float | The latitude of the parking spot |
-| `created_at` | datetime | |
-| `updated_at` | datetime | |
+| `created_at` | datetime | When this parking spot was created in the dataset |
+| `updated_at` | datetime | When this parking spot was updated in the dataset |
 </details>
 
 ## Example
