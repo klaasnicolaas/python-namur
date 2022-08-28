@@ -191,7 +191,7 @@ SOFTWARE.
 [code-quality]: https://lgtm.com/projects/g/klaasnicolaas/python-namur/context:python
 [commits-shield]: https://img.shields.io/github/commit-activity/y/klaasnicolaas/python-namur.svg
 [commits-url]: https://github.com/klaasnicolaas/python-namur/commits/main
-[codecov-shield]: https://codecov.io/gh/klaasnicolaas/python-namur/branch/main/graph/badge.svg?token=OZgV3Ib3Er
+[codecov-shield]: https://codecov.io/gh/klaasnicolaas/python-namur/branch/main/graph/badge.svg?token=AMVI2EVPR0
 [codecov-url]: https://codecov.io/gh/klaasnicolaas/python-namur
 [forks-shield]: https://img.shields.io/github/forks/klaasnicolaas/python-namur.svg
 [forks-url]: https://github.com/klaasnicolaas/python-namur/network/members
@@ -200,7 +200,7 @@ SOFTWARE.
 [license-shield]: https://img.shields.io/github/license/klaasnicolaas/python-namur.svg
 [last-commit-shield]: https://img.shields.io/github/last-commit/klaasnicolaas/python-namur.svg
 [maintenance-shield]: https://img.shields.io/maintenance/yes/2022.svg
-[maintainability-shield]: https://api.codeclimate.com/v1/badges/cb6cb45c337d037071b7/maintainability
+[maintainability-shield]: https://api.codeclimate.com/v1/badges/4beb1bcd3473c5344432/maintainability
 [maintainability-url]: https://codeclimate.com/github/klaasnicolaas/python-namur/maintainability
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
 [pypi]: https://pypi.org/project/namur/
