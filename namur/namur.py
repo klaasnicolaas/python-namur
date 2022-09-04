@@ -157,7 +157,6 @@ class ODPNamur:
                 "refine.type_parking": await self.define_type(parking_type),
             },
         )
-        print(locations)
 
         for item in locations["records"]:
             results.append(ParkingSpot.from_json(item))
