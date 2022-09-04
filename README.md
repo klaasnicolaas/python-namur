@@ -48,21 +48,21 @@ You can use the following parameters in your request:
 - **limit** (default: 10) - How many results you want to retrieve.
 - **parking_type** (default: 1) - See the list below to find the corresponding number.
 
-| parking_type | number |
-| :--------------- | :--------: |
-| Place normale | 1 |
-| Devant accès/garage | 2 |
-| PMR | 3 |
-| Dépose-minute | 4 |
-| Livraison | 5 |
-| Police | 6 |
-| Taxi | 7 |
-| Car-sharing | 8 |
-| Recyclage | 9 |
-| Car | 10 |
-| Bus scolaire | 11 |
-| Borne électrique | 12 |
-| Réservé | 13 |
+| parking_type | number | counter |
+| :----------- | :----: | :-----: |
+| Place normale | 1 | Too much |
+| Devant accès/garage | 2 | 5540 |
+| PMR | 3 | 305 |
+| Dépose-minute | 4 | 195 |
+| Livraison | 5 | 80 |
+| Police | 6 | 72 |
+| Taxi | 7 | 30 |
+| Car-sharing | 8 | 25 |
+| Recyclage | 9 | 25 |
+| Car | 10 | 11 |
+| Bus scolaire | 11 | 6 |
+| Borne électrique | 12 | 2 |
+| Réservé | 13 | 1 |
 
 You get the following output data back with this python package:
 
