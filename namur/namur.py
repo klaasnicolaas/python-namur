@@ -5,11 +5,11 @@ import asyncio
 import socket
 from dataclasses import dataclass
 from importlib import metadata
-from typing import Any
+from typing import Any, cast
 
-import aiohttp
 import async_timeout
-from aiohttp import hdrs
+from aiohttp import ClientError, ClientSession
+from aiohttp.hdrs import METH_GET
 from yarl import URL
 
 from .exceptions import (
@@ -26,7 +26,7 @@ class ODPNamur:
     """Main class for handling data fetchting from Open Data Platform of Namur."""
 
     request_timeout: float = 10.0
-    session: aiohttp.client.ClientSession | None = None
+    session: ClientSession | None = None
 
     _close_session: bool = False
 
@@ -35,12 +35,15 @@ class ODPNamur:
         """Define the parking type.
 
         Args:
+        ----
             parking_type: The selected parking type number.
 
         Returns:
+        -------
             The parking type as string.
 
         Raises:
+        ------
             ODPNamurTypeError: If the parking type is not listed.
         """
         options = {
@@ -61,8 +64,9 @@ class ODPNamur:
 
         # Check if the parking type is listed
         if options is None:
+            msg = "The selected number does not match the list of parking types"
             raise ODPNamurTypeError(
-                "The selected number does not match the list of parking types"
+                msg,
             )
         return options
 
@@ -70,21 +74,24 @@ class ODPNamur:
         self,
         uri: str,
         *,
-        method: str = hdrs.METH_GET,
+        method: str = METH_GET,
         params: dict[str, Any] | None = None,
     ) -> Any:
         """Handle a request to the Open Data Platform API of Namur.
 
         Args:
+        ----
             uri: Request URI, without '/', for example, 'status'
             method: HTTP method to use, for example, 'GET'
             params: Extra options to improve or limit the response.
 
         Returns:
+        -------
             A Python dictionary (json) with the response from
             the Open Data Platform API of Namur.
 
         Raises:
+        ------
             ODPNamurConnectionError: An error occurred while
                 communicating with the Open Data Platform API.
             ODPNamurError: Received an unexpected response from
@@ -92,7 +99,9 @@ class ODPNamur:
         """
         version = metadata.version(__package__)
         url = URL.build(
-            scheme="https", host="data.namur.be", path="/api/records/1.0/"
+            scheme="https",
+            host="data.namur.be",
+            path="/api/records/1.0/",
         ).join(URL(uri))
 
         headers = {
@@ -101,7 +110,7 @@ class ODPNamur:
         }
 
         if self.session is None:
-            self.session = aiohttp.ClientSession()
+            self.session = ClientSession()
             self._close_session = True
 
         try:
@@ -115,37 +124,45 @@ class ODPNamur:
                 )
                 response.raise_for_status()
         except asyncio.TimeoutError as exception:
+            msg = "Timeout occurred while connecting to the Open Data Platform API."
             raise ODPNamurConnectionError(
-                "Timeout occurred while connecting to the Open Data Platform API."
+                msg,
             ) from exception
-        except (aiohttp.ClientError, socket.gaierror) as exception:
+        except (ClientError, socket.gaierror) as exception:
+            msg = "Error occurred while communicating with the Open Data Platform API."
             raise ODPNamurConnectionError(
-                "Error occurred while communicating with the Open Data Platform API."
+                msg,
             ) from exception
 
         content_type = response.headers.get("Content-Type", "")
         if "application/json" not in content_type:
             text = await response.text()
+            msg = "Unexpected content type response from the Open Data Platform API"
             raise ODPNamurError(
-                "Unexpected content type response from the Open Data Platform API",
+                msg,
                 {"Content-Type": content_type, "response": text},
             )
 
-        return await response.json()
+        return cast(dict[str, Any], await response.json())
 
     async def parking_spaces(
-        self, limit: int = 10, parking_type: int = 1
+        self,
+        limit: int = 10,
+        parking_type: int = 1,
     ) -> list[ParkingSpot]:
         """Get all the parking locations.
 
         Args:
+        ----
             limit: Number of rows to return.
             parking_type: The selected parking type number.
 
         Returns:
+        -------
             A list of ParkingSpot objects.
 
         Raises:
+        ------
             ODPNamurResultsError: When no results are found.
         """
         results: list[ParkingSpot] = []
@@ -161,7 +178,8 @@ class ODPNamur:
         for item in locations["records"]:
             results.append(ParkingSpot.from_json(item))
         if not results:
-            raise ODPNamurResultsError("No parking locations were found")
+            msg = "No parking locations were found"
+            raise ODPNamurResultsError(msg)
         return results
 
     async def close(self) -> None:
@@ -172,7 +190,8 @@ class ODPNamur:
     async def __aenter__(self) -> ODPNamur:
         """Async enter.
 
-        Returns:
+        Returns
+        -------
             The Open Data Platform Namur object.
         """
         return self
@@ -181,6 +200,7 @@ class ODPNamur:
         """Async exit.
 
         Args:
+        ----
             _exc_info: Exec type.
         """
         await self.close()

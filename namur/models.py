@@ -5,6 +5,8 @@ from dataclasses import dataclass
 from datetime import datetime
 from typing import Any
 
+import pytz
+
 
 @dataclass
 class ParkingSpot:
@@ -19,16 +21,17 @@ class ParkingSpot:
     updated_at: datetime
 
     @classmethod
-    def from_json(cls, data: dict[str, Any]) -> ParkingSpot:
+    def from_json(cls: type[ParkingSpot], data: dict[str, Any]) -> ParkingSpot:
         """Return a ParkingSpot object from a JSON dictionary.
 
         Args:
+        ----
             data: The JSON data from the API.
 
         Returns:
+        -------
             A ParkingSpot object.
         """
-
         attr = data["fields"]
         geo = data["geometry"]["coordinates"]
         return cls(
@@ -37,8 +40,12 @@ class ParkingSpot:
             street=attr.get("rue_nom"),
             longitude=geo[0],
             latitude=geo[1],
-            created_at=datetime.strptime(attr.get("date_creation"), "%Y-%m-%d"),
+            created_at=datetime.strptime(
+                attr.get("date_creation"),
+                "%Y-%m-%d",
+            ).astimezone(pytz.utc),
             updated_at=datetime.strptime(
-                data["record_timestamp"], "%Y-%m-%dT%H:%M:%SZ"
-            ),
+                data["record_timestamp"],
+                "%Y-%m-%dT%H:%M:%SZ",
+            ).astimezone(pytz.utc),
         )
