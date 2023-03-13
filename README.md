@@ -9,7 +9,7 @@
 [![License][license-shield]](LICENSE)
 
 [![GitHub Activity][commits-shield]][commits-url]
-[![Forks][forks-shield]][forks-url]
+[![PyPi Downloads][downloads-shield]][downloads-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![GitHub Last Commit][last-commit-shield]][commits-url]
@@ -198,8 +198,8 @@ SOFTWARE.
 [commits-url]: https://github.com/klaasnicolaas/python-namur/commits/main
 [codecov-shield]: https://codecov.io/gh/klaasnicolaas/python-namur/branch/main/graph/badge.svg?token=AMVI2EVPR0
 [codecov-url]: https://codecov.io/gh/klaasnicolaas/python-namur
-[forks-shield]: https://img.shields.io/github/forks/klaasnicolaas/python-namur.svg
-[forks-url]: https://github.com/klaasnicolaas/python-namur/network/members
+[downloads-shield]: https://img.shields.io/pypi/dm/namur
+[downloads-url]: https://pypistats.org/packages/namur
 [issues-shield]: https://img.shields.io/github/issues/klaasnicolaas/python-namur.svg
 [issues-url]: https://github.com/klaasnicolaas/python-namur/issues
 [license-shield]: https://img.shields.io/github/license/klaasnicolaas/python-namur.svg
