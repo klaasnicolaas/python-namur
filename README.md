@@ -1,4 +1,5 @@
-## Python - ODP Namur Client
+<!-- Banner -->
+![alt Banner of the ODP Namur package](https://raw.githubusercontent.com/klaasnicolaas/python-namur/main/assets/header_namur-min.png)
 
 <!-- PROJECT SHIELDS -->
 [![GitHub Release][releases-shield]][releases]
@@ -14,11 +15,11 @@
 [![GitHub Last Commit][last-commit-shield]][commits-url]
 
 [![Code Quality][code-quality-shield]][code-quality]
-[![Maintainability][maintainability-shield]][maintainability-url]
-[![Code Coverage][codecov-shield]][codecov-url]
-
 [![Build Status][build-shield]][build-url]
 [![Typing Status][typing-shield]][typing-url]
+
+[![Maintainability][maintainability-shield]][maintainability-url]
+[![Code Coverage][codecov-shield]][codecov-url]
 
 Asynchronous Python client for the open datasets of Namur (Namen - Belgium).
 
@@ -191,8 +192,8 @@ SOFTWARE.
 <!-- MARKDOWN LINKS & IMAGES -->
 [build-shield]: https://github.com/klaasnicolaas/python-namur/actions/workflows/tests.yaml/badge.svg
 [build-url]: https://github.com/klaasnicolaas/python-namur/actions/workflows/tests.yaml
-[code-quality-shield]: https://img.shields.io/lgtm/grade/python/g/klaasnicolaas/python-namur.svg?logo=lgtm&logoWidth=18
-[code-quality]: https://lgtm.com/projects/g/klaasnicolaas/python-namur/context:python
+[code-quality-shield]: https://github.com/klaasnicolaas/python-namur/actions/workflows/codeql.yaml/badge.svg
+[code-quality]: https://github.com/klaasnicolaas/python-namur/actions/workflows/codeql.yaml
 [commits-shield]: https://img.shields.io/github/commit-activity/y/klaasnicolaas/python-namur.svg
 [commits-url]: https://github.com/klaasnicolaas/python-namur/commits/main
 [codecov-shield]: https://codecov.io/gh/klaasnicolaas/python-namur/branch/main/graph/badge.svg?token=AMVI2EVPR0
