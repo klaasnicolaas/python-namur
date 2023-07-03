@@ -165,7 +165,6 @@ class ODPNamur:
         ------
             ODPNamurResultsError: When no results are found.
         """
-        results: list[ParkingSpot] = []
         locations = await self._request(
             "search/",
             params={
@@ -175,8 +174,9 @@ class ODPNamur:
             },
         )
 
-        for item in locations["records"]:
-            results.append(ParkingSpot.from_json(item))
+        results: list[ParkingSpot] = [
+            ParkingSpot.from_json(item) for item in locations["records"]
+        ]
         if not results:
             msg = "No parking locations were found"
             raise ODPNamurResultsError(msg)
