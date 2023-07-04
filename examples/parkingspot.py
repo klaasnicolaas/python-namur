@@ -11,9 +11,8 @@ async def main() -> None:
     async with ODPNamur() as client:
         parking_spaces = await client.parking_spaces(limit=10, parking_type=3)
 
-        count: int
-        for index, item in enumerate(parking_spaces, 1):
-            count = index
+        count: int = len(parking_spaces)
+        for item in parking_spaces:
             print(item)
 
         print("__________________________")
