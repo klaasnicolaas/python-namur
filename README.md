@@ -126,7 +126,7 @@ This Python project relies on [Poetry][poetry] as its dependency manager,
 providing comprehensive management and control over project dependencies.
 You need at least:
 
-- Python 3.9+
+- Python 3.11+
 - [Poetry][poetry-install]
 
 Install all packages, including all development requirements:
