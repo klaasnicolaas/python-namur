@@ -211,7 +211,7 @@ SOFTWARE.
 [maintenance-shield]: https://img.shields.io/maintenance/yes/2023.svg
 [maintainability-shield]: https://api.codeclimate.com/v1/badges/4beb1bcd3473c5344432/maintainability
 [maintainability-url]: https://codeclimate.com/github/klaasnicolaas/python-namur/maintainability
-[project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
+[project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg
 [pypi]: https://pypi.org/project/namur/
 [python-versions-shield]: https://img.shields.io/pypi/pyversions/namur
 [typing-shield]: https://github.com/klaasnicolaas/python-namur/actions/workflows/typing.yaml/badge.svg
