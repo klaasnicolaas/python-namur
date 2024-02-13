@@ -44,6 +44,7 @@ class ODPNamur:
         Raises:
         ------
             ODPNamurTypeError: If the parking type is not listed.
+
         """
         options = {
             1: "Place normale",
@@ -95,6 +96,7 @@ class ODPNamur:
                 communicating with the Open Data Platform API.
             ODPNamurError: Received an unexpected response from
                 the Open Data Platform API.
+
         """
         version = metadata.version(__package__)
         url = URL.build(
@@ -163,6 +165,7 @@ class ODPNamur:
         Raises:
         ------
             ODPNamurResultsError: When no results are found.
+
         """
         locations = await self._request(
             "search/",
@@ -192,6 +195,7 @@ class ODPNamur:
         Returns
         -------
             The Open Data Platform Namur object.
+
         """
         return self
 
@@ -201,5 +205,6 @@ class ODPNamur:
         Args:
         ----
             _exc_info: Exec type.
+
         """
         await self.close()
