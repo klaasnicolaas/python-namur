@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import pytest
 from aresponses import ResponsesMockServer
+from syrupy.assertion import SnapshotAssertion
 
 from namur import ODPNamur, ODPNamurResultsError, ODPNamurTypeError, ParkingSpot
 
@@ -11,7 +12,9 @@ from . import load_fixtures
 
 
 async def test_parking_model(
-    aresponses: ResponsesMockServer, odp_namur_client: ODPNamur
+    aresponses: ResponsesMockServer,
+    snapshot: SnapshotAssertion,
+    odp_namur_client: ODPNamur,
 ) -> None:
     """Test the parking model."""
     aresponses.add(
@@ -25,10 +28,7 @@ async def test_parking_model(
         ),
     )
     locations: list[ParkingSpot] = await odp_namur_client.parking_spaces(parking_type=1)
-    for item in locations:
-        assert item.spot_id is not None
-        assert item.street is not None
-        assert item.updated_at is not None
+    assert locations == snapshot
 
 
 async def test_no_parking_results(
