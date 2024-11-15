@@ -43,7 +43,7 @@ class ParkingSpot:
             created_at=datetime.strptime(
                 attr.get("date_creation"),
                 "%Y-%m-%d",
-            ).astimezone(UTC),
+            ).replace(tzinfo=UTC),
             updated_at=datetime.strptime(
                 data["record_timestamp"],
                 "%Y-%m-%dT%H:%M:%SZ",
