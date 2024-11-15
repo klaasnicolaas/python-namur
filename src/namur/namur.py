@@ -20,6 +20,8 @@ from .exceptions import (
 )
 from .models import ParkingSpot
 
+VERSION = metadata.version(__package__)
+
 
 @dataclass
 class ODPNamur:
@@ -99,7 +101,6 @@ class ODPNamur:
                 the Open Data Platform API.
 
         """
-        version = metadata.version(__package__)
         url = URL.build(
             scheme="https",
             host="data.namur.be",
@@ -108,7 +109,7 @@ class ODPNamur:
 
         headers = {
             "Accept": "application/json, text/plain",
-            "User-Agent": f"PythonNamur/{version}",
+            "User-Agent": f"PythonNamur/{VERSION}",
         }
 
         if self.session is None:
