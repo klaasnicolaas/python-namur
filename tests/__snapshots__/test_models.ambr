@@ -1,0 +1,15 @@
+# serializer version: 1
+# name: test_parking_model
+  list([
+    ParkingSpot(spot_id='2172', parking_type='PMR', street="Place de l'Ecole des Cadets", longitude=4.87520726773486, latitude=50.46580805599107, created_at=datetime.datetime(2020, 9, 15, 22, 0, tzinfo=<UTC>), updated_at=datetime.datetime(2022, 8, 27, 23, 10, tzinfo=<UTC>)),
+    ParkingSpot(spot_id='2529', parking_type='PMR', street='Rue Lucien Namêche', longitude=4.868819424458087, latitude=50.46702277846857, created_at=datetime.datetime(2020, 9, 15, 22, 0, tzinfo=<UTC>), updated_at=datetime.datetime(2022, 8, 27, 23, 10, tzinfo=<UTC>)),
+    ParkingSpot(spot_id='14378', parking_type='PMR', street='Rue du Treizième de Ligne', longitude=4.821362935779792, latitude=50.47341760702161, created_at=datetime.datetime(2020, 9, 15, 22, 0, tzinfo=<UTC>), updated_at=datetime.datetime(2022, 8, 27, 23, 10, tzinfo=<UTC>)),
+    ParkingSpot(spot_id='15582', parking_type='PMR', street='Rue Charles Lamquet', longitude=4.87941976567549, latitude=50.4639856538556, created_at=datetime.datetime(2020, 9, 15, 22, 0, tzinfo=<UTC>), updated_at=datetime.datetime(2022, 8, 27, 23, 10, tzinfo=<UTC>)),
+    ParkingSpot(spot_id='15591', parking_type='PMR', street='Place Joséphine Charlotte', longitude=4.877104301130791, latitude=50.46122805654307, created_at=datetime.datetime(2020, 9, 15, 22, 0, tzinfo=<UTC>), updated_at=datetime.datetime(2022, 8, 27, 23, 10, tzinfo=<UTC>)),
+    ParkingSpot(spot_id='15586', parking_type='PMR', street='Place Notre-Dame de la Paix', longitude=4.896604222426458, latitude=50.4406149774601, created_at=datetime.datetime(2020, 9, 15, 22, 0, tzinfo=<UTC>), updated_at=datetime.datetime(2022, 8, 27, 23, 10, tzinfo=<UTC>)),
+    ParkingSpot(spot_id='15590', parking_type='PMR', street='Chaussée de Liège', longitude=4.88408357144082, latitude=50.45869389215245, created_at=datetime.datetime(2020, 9, 15, 22, 0, tzinfo=<UTC>), updated_at=datetime.datetime(2022, 8, 27, 23, 10, tzinfo=<UTC>)),
+    ParkingSpot(spot_id='15592', parking_type='PMR', street='Place Joséphine Charlotte', longitude=4.877126555534669, latitude=50.461210614713515, created_at=datetime.datetime(2020, 9, 15, 22, 0, tzinfo=<UTC>), updated_at=datetime.datetime(2022, 8, 27, 23, 10, tzinfo=<UTC>)),
+    ParkingSpot(spot_id='15594', parking_type='PMR', street='Rue Commandant Tilot', longitude=4.876987945585452, latitude=50.4624169952671, created_at=datetime.datetime(2020, 9, 15, 22, 0, tzinfo=<UTC>), updated_at=datetime.datetime(2022, 8, 27, 23, 10, tzinfo=<UTC>)),
+    ParkingSpot(spot_id='14175', parking_type='PMR', street='Rue du Bouquet', longitude=4.837716682008543, latitude=50.47477032756567, created_at=datetime.datetime(2020, 9, 15, 22, 0, tzinfo=<UTC>), updated_at=datetime.datetime(2022, 8, 27, 23, 10, tzinfo=<UTC>)),
+  ])
+# ---
