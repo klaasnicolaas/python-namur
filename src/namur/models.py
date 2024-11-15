@@ -3,10 +3,8 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import UTC, datetime
 from typing import Any
-
-import pytz
 
 
 @dataclass
@@ -45,9 +43,9 @@ class ParkingSpot:
             created_at=datetime.strptime(
                 attr.get("date_creation"),
                 "%Y-%m-%d",
-            ).astimezone(pytz.utc),
+            ).astimezone(UTC),
             updated_at=datetime.strptime(
                 data["record_timestamp"],
                 "%Y-%m-%dT%H:%M:%SZ",
-            ).astimezone(pytz.utc),
+            ).astimezone(UTC),
         )
