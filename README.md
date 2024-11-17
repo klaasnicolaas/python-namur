@@ -48,21 +48,21 @@ You can use the following parameters in your request:
 - **limit** (default: 10) - How many results you want to retrieve.
 - **parking_type** (default: ParkingType.NORMAL) - See the list below to find the corresponding enum value.
 
-| `ParkingType`            | Enum              |
-| :----------------------- | :---------------- |
-| Normal parking spot      | NORMAL            |
-| Garage                   | GARAGE            |
-| Disabled parking spot    | PMR               |
-| Drop-off spot            | DROP_OFF          |
-| Delivery spot            | DELIVERY          |
-| Police parking spot      | POLICE            |
-| Taxi parking spot        | TAXI              |
-| Car-sharing parking spot | CAR_SHARING       |
-| Recycling parking spot   | RECYCLING         |
-| Car parking spot         | CAR               |
-| School bus parking spot  | SCHOOL_BUS        |
-| Electric charging spot   | ELECTRIC_CHARGING |
-| Reserved parking spot    | RESERVED          |
+| `ParkingType`            | Enum         |
+| :----------------------- | :----------- |
+| Normal parking spot      | NORMAL       |
+| Garage                   | GARAGE       |
+| Disabled parking spot    | PMR          |
+| Drop-off spot            | DROP_OFF     |
+| Delivery spot            | DELIVERY     |
+| Police parking spot      | POLICE       |
+| Taxi parking spot        | TAXI         |
+| Car-sharing parking spot | CAR_SHARING  |
+| Recycling parking spot   | RECYCLING    |
+| Car parking spot         | CAR          |
+| School bus parking spot  | SCHOOL_BUS   |
+| Electric charging spot   | ELECTRIC_CAR |
+| Reserved parking spot    | RESERVED     |
 
 You get the following output data back with this python package:
 
