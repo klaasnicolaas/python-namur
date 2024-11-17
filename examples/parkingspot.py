@@ -3,13 +3,15 @@
 
 import asyncio
 
-from namur import ODPNamur
+from namur import ODPNamur, ParkingType
 
 
 async def main() -> None:
     """Show example on using the Namur API client."""
     async with ODPNamur() as client:
-        parking_spaces = await client.parking_spaces(limit=10, parking_type=3)
+        parking_spaces = await client.parking_spaces(
+            limit=10, parking_type=ParkingType.PMR
+        )
 
         count: int = len(parking_spaces)
         for item in parking_spaces:

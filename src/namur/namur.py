@@ -16,9 +16,8 @@ from .exceptions import (
     ODPNamurConnectionError,
     ODPNamurError,
     ODPNamurResultsError,
-    ODPNamurTypeError,
 )
-from .models import ParkingSpot
+from .models import ParkingSpot, ParkingType
 
 VERSION = metadata.version(__package__)
 
@@ -31,47 +30,6 @@ class ODPNamur:
     session: ClientSession | None = None
 
     _close_session: bool = False
-
-    @staticmethod
-    async def define_type(parking_type: int) -> str:
-        """Define the parking type.
-
-        Args:
-        ----
-            parking_type: The selected parking type number.
-
-        Returns:
-        -------
-            The parking type as string.
-
-        Raises:
-        ------
-            ODPNamurTypeError: If the parking type is not listed.
-
-        """
-        options = {
-            1: "Place normale",
-            2: "Devant accès/garage",
-            3: "PMR",
-            4: "Dépose-minute",
-            5: "Livraison",
-            6: "Police",
-            7: "Taxi",
-            8: "Car-sharing",
-            9: "Recyclage",
-            10: "Car",
-            11: "Bus scolaire",
-            12: "Borne électrique",
-            13: "Réservé",
-        }.get(parking_type)
-
-        # Check if the parking type is listed
-        if options is None:
-            msg = "The selected number does not match the list of parking types"
-            raise ODPNamurTypeError(
-                msg,
-            )
-        return options
 
     async def _request(
         self,
@@ -151,14 +109,14 @@ class ODPNamur:
     async def parking_spaces(
         self,
         limit: int = 10,
-        parking_type: int = 1,
+        parking_type: ParkingType = ParkingType.NORMAL,
     ) -> list[ParkingSpot]:
         """Get all the parking locations.
 
         Args:
         ----
             limit: Number of rows to return.
-            parking_type: The selected parking type number.
+            parking_type (enum): The selected parking type.
 
         Returns:
         -------
@@ -174,7 +132,7 @@ class ODPNamur:
             params={
                 "dataset": "namur-parking-emplacements",
                 "rows": limit,
-                "refine.type_parking": await self.define_type(parking_type),
+                "refine.type_parking": parking_type.value,
             },
         )
 

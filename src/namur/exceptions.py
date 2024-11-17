@@ -9,9 +9,5 @@ class ODPNamurConnectionError(ODPNamurError):
     """Open Data Platform Namur - connection exception."""
 
 
-class ODPNamurTypeError(ODPNamurError):
-    """Open Data Platform Namur - parking type exception."""
-
-
 class ODPNamurResultsError(ODPNamurError):
     """Open Data Platform Namur - no results exception."""

@@ -4,9 +4,8 @@ from .exceptions import (
     ODPNamurConnectionError,
     ODPNamurError,
     ODPNamurResultsError,
-    ODPNamurTypeError,
 )
-from .models import ParkingSpot
+from .models import ParkingSpot, ParkingType
 from .namur import ODPNamur
 
 __all__ = [
@@ -14,6 +13,6 @@ __all__ = [
     "ODPNamurConnectionError",
     "ODPNamurError",
     "ODPNamurResultsError",
-    "ODPNamurTypeError",
     "ParkingSpot",
+    "ParkingType",
 ]
