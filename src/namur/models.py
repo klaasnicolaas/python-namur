@@ -4,7 +4,26 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from datetime import UTC, datetime
+from enum import Enum
 from typing import Any
+
+
+class ParkingType(str, Enum):
+    """Enum representing the type of parking."""
+
+    NORMAL = "Place normale"
+    GARAGE = "Devant accès/garage"
+    PMR = "PMR"
+    DROP_OFF = "Dépose-minute"
+    DELIVERY = "Livraison"
+    POLICE = "Police"
+    TAXI = "Taxi"
+    CAR_SHARING = "Car-sharing"
+    RECYCLING = "Recyclage"
+    CAR = "Car"
+    SCHOOL_BUS = "Bus scolaire"
+    ELECTRIC_CAR = "Borne électrique"
+    RESERVED = "Réservé"
 
 
 @dataclass
