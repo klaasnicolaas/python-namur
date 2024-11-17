@@ -46,23 +46,23 @@ You can read the following datasets with this package:
 You can use the following parameters in your request:
 
 - **limit** (default: 10) - How many results you want to retrieve.
-- **parking_type** (default: 1) - See the list below to find the corresponding number.
+- **parking_type** (default: ParkingType.NORMAL) - See the list below to find the corresponding enum value.
 
-| parking_type | number | counter |
-| :----------- | :----: | :-----: |
-| Place normale | 1 | Too much |
-| Devant accès/garage | 2 | 5540 |
-| PMR | 3 | 305 |
-| Dépose-minute | 4 | 195 |
-| Livraison | 5 | 80 |
-| Police | 6 | 72 |
-| Taxi | 7 | 30 |
-| Car-sharing | 8 | 25 |
-| Recyclage | 9 | 25 |
-| Car | 10 | 11 |
-| Bus scolaire | 11 | 6 |
-| Borne électrique | 12 | 2 |
-| Réservé | 13 | 1 |
+| `ParkingType`            | Enum         |
+| :----------------------- | :----------- |
+| Normal parking spot      | NORMAL       |
+| Garage                   | GARAGE       |
+| Disabled parking spot    | PMR          |
+| Drop-off spot            | DROP_OFF     |
+| Delivery spot            | DELIVERY     |
+| Police parking spot      | POLICE       |
+| Taxi parking spot        | TAXI         |
+| Car-sharing parking spot | CAR_SHARING  |
+| Recycling parking spot   | RECYCLING    |
+| Car parking spot         | CAR          |
+| School bus parking spot  | SCHOOL_BUS   |
+| Electric charging spot   | ELECTRIC_CAR |
+| Reserved parking spot    | RESERVED     |
 
 You get the following output data back with this python package:
 
