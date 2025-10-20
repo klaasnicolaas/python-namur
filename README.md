@@ -13,11 +13,8 @@
 [![GitHub Last Commit][last-commit-shield]][commits-url]
 [![Open in Dev Containers][devcontainer-shield]][devcontainer]
 
-[![Code Quality][code-quality-shield]][code-quality]
 [![Build Status][build-shield]][build-url]
 [![Typing Status][typing-shield]][typing-url]
-
-[![Maintainability][maintainability-shield]][maintainability-url]
 [![Code Coverage][codecov-shield]][codecov-url]
 
 Asynchronous Python client for the open datasets of Namur (Namen - Belgium).
@@ -200,8 +197,6 @@ SOFTWARE.
 <!-- MARKDOWN LINKS & IMAGES -->
 [build-shield]: https://github.com/klaasnicolaas/python-namur/actions/workflows/tests.yaml/badge.svg
 [build-url]: https://github.com/klaasnicolaas/python-namur/actions/workflows/tests.yaml
-[code-quality-shield]: https://github.com/klaasnicolaas/python-namur/actions/workflows/codeql.yaml/badge.svg
-[code-quality]: https://github.com/klaasnicolaas/python-namur/actions/workflows/codeql.yaml
 [commits-shield]: https://img.shields.io/github/commit-activity/y/klaasnicolaas/python-namur.svg
 [commits-url]: https://github.com/klaasnicolaas/python-namur/commits/main
 [codecov-shield]: https://codecov.io/gh/klaasnicolaas/python-namur/branch/main/graph/badge.svg?token=AMVI2EVPR0
@@ -213,8 +208,6 @@ SOFTWARE.
 [license-shield]: https://img.shields.io/github/license/klaasnicolaas/python-namur.svg
 [last-commit-shield]: https://img.shields.io/github/last-commit/klaasnicolaas/python-namur.svg
 [maintenance-shield]: https://img.shields.io/maintenance/yes/2025.svg
-[maintainability-shield]: https://api.codeclimate.com/v1/badges/4beb1bcd3473c5344432/maintainability
-[maintainability-url]: https://codeclimate.com/github/klaasnicolaas/python-namur/maintainability
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg
 [pypi]: https://pypi.org/project/namur/
 [python-versions-shield]: https://img.shields.io/pypi/pyversions/namur
