@@ -2,13 +2,13 @@
 
 from __future__ import annotations
 
+import enum
 from dataclasses import dataclass
 from datetime import UTC, datetime
-from enum import Enum
 from typing import Any
 
 
-class ParkingType(str, Enum):
+class ParkingType(enum.StrEnum):
     """Enum representing the type of parking."""
 
     NORMAL = "Place normale"
