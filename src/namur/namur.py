@@ -19,7 +19,7 @@ from .exceptions import (
 )
 from .models import ParkingSpot, ParkingType
 
-VERSION = metadata.version(__package__)
+VERSION = metadata.version("namur")
 
 
 @dataclass
