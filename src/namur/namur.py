@@ -17,7 +17,7 @@ from .exceptions import (
     ODPNamurError,
     ODPNamurResultsError,
 )
-from .models import ParkingSpot, ParkingType
+from .models import ParkingSnapshot, ParkingSpot, ParkingType
 
 VERSION = metadata.version("namur")
 
@@ -143,6 +143,92 @@ class ODPNamur:
             msg = "No parking locations were found"
             raise ODPNamurResultsError(msg)
         return results
+
+    async def dataset_version(self) -> str:
+        """Return the dataset processing timestamp used to detect source changes."""
+        metadata_response = await self._request(
+            "/api/explore/v2.1/catalog/datasets/namur-parking-emplacements"
+        )
+        try:
+            version = metadata_response["metas"]["default"]["data_processed"]
+        except (KeyError, TypeError) as exception:
+            msg = "Missing dataset processing timestamp"
+            raise ODPNamurResultsError(msg) from exception
+        if not isinstance(version, str) or not version.strip():
+            msg = "Missing dataset processing timestamp"
+            raise ODPNamurResultsError(msg)
+        return version
+
+    async def parking_snapshot(
+        self,
+        parking_type: ParkingType = ParkingType.NORMAL,
+    ) -> ParkingSnapshot:
+        """Fetch every selected parking record, rejecting incomplete or changing data.
+
+        Opendatasoft record searches allow offsets up to 10,000 records. Larger
+        selections raise an error instead of returning a truncated snapshot.
+        The existing parking_spaces method remains available for capped requests.
+        """
+        version = await self.dataset_version()
+        results: list[ParkingSpot] = []
+        identifiers: set[str] = set()
+        total_count: int | None = None
+        pages_fetched = 0
+        while total_count is None or len(results) < total_count:
+            page = await self._request(
+                "search/",
+                params={
+                    "dataset": "namur-parking-emplacements",
+                    "rows": 100,
+                    "start": len(results),
+                    "sort": "identifiant",
+                    "refine.type_parking": parking_type.value,
+                },
+            )
+            count = page.get("nhits")
+            records = page.get("records")
+            if (
+                type(count) is not int
+                or count < 0
+                or count > 10000
+                or not isinstance(records, list)
+            ):
+                msg = "Invalid or unsupported parking snapshot response"
+                raise ODPNamurResultsError(msg)
+            if total_count is None:
+                total_count = count
+            if count != total_count:
+                msg = "Parking count changed during snapshot"
+                raise ODPNamurResultsError(msg)
+            if len(records) != min(100, total_count - len(results)):
+                msg = "Incomplete parking snapshot page"
+                raise ODPNamurResultsError(msg)
+            for record in records:
+                try:
+                    identifier = record["fields"]["identifiant"]
+                    spot = ParkingSpot.from_json(record)
+                except (KeyError, TypeError, ValueError, IndexError) as exception:
+                    msg = "Invalid or duplicate parking record in snapshot"
+                    raise ODPNamurResultsError(msg) from exception
+                if (
+                    not isinstance(identifier, str)
+                    or not identifier.strip()
+                    or identifier in identifiers
+                ):
+                    msg = "Invalid or duplicate parking identifier in snapshot"
+                    raise ODPNamurResultsError(msg)
+                identifiers.add(identifier)
+                results.append(spot)
+            pages_fetched += 1
+        if await self.dataset_version() != version:
+            msg = "Dataset changed during parking snapshot"
+            raise ODPNamurResultsError(msg)
+        return ParkingSnapshot(
+            records=results,
+            total_count=total_count,
+            pages_fetched=pages_fetched,
+            data_processed=version,
+        )
 
     async def close(self) -> None:
         """Close open client session."""

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import enum
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from typing import Any
 
@@ -37,6 +37,7 @@ class ParkingSpot:
     latitude: float
     created_at: datetime
     updated_at: datetime
+    source_attributes: dict[str, Any] = field(default_factory=dict)
 
     @classmethod
     def from_json(cls: type[ParkingSpot], data: dict[str, Any]) -> ParkingSpot:
@@ -54,6 +55,7 @@ class ParkingSpot:
         attr = data["fields"]
         geo = data["geometry"]["coordinates"]
         return cls(
+            source_attributes=dict(attr),
             spot_id=attr.get("identifiant"),
             parking_type=attr.get("type_parking"),
             street=attr.get("rue_nom"),
@@ -68,3 +70,14 @@ class ParkingSpot:
                 "%Y-%m-%dT%H:%M:%SZ",
             ).replace(tzinfo=UTC),
         )
+
+
+@dataclass
+class ParkingSnapshot:
+    """Complete parking records from one stable dataset version."""
+
+    records: list[ParkingSpot]
+    total_count: int
+    pages_fetched: int
+    data_processed: str
+    complete: bool = True
