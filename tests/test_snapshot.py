@@ -44,7 +44,7 @@ async def test_complete_snapshot(odp_namur_client: ODPNamur) -> None:
     assert snapshot.complete
     assert snapshot.total_count == len(snapshot.records) == 201
     assert snapshot.pages_fetched == 3
-    assert snapshot.data_processed == "version"
+    assert snapshot.source_version == "version"
     assert snapshot.records[0].source_attributes == data[0]["fields"]
     assert snapshot.records[0].source_attributes["horaire"]
     assert [call.kwargs["params"]["start"] for call in request.call_args_list] == [
@@ -143,3 +143,63 @@ async def test_metadata_endpoint(
         ),
     )
     assert await odp_namur_client.dataset_version() == "version"
+
+
+async def test_empty_snapshot(odp_namur_client: ODPNamur) -> None:
+    """An empty selection is a complete successful snapshot."""
+    with (
+        patch.object(ODPNamur, "dataset_version", AsyncMock(return_value="version")),
+        patch.object(
+            ODPNamur, "_request", AsyncMock(return_value={"nhits": 0, "records": []})
+        ),
+    ):
+        snapshot = await odp_namur_client.parking_snapshot(ParkingType.PMR)
+    assert snapshot.records == []
+    assert snapshot.total_count == 0
+    assert snapshot.pages_fetched == 1
+    assert snapshot.source_version == "version"
+    assert snapshot.complete
+
+
+@pytest.mark.parametrize("max_records", [0, -1, True, False, 1.5, "10", None, 10001])
+async def test_invalid_max_records(
+    max_records: object, odp_namur_client: ODPNamur
+) -> None:
+    """Reject invalid limits before requesting the source."""
+    with (
+        patch.object(ODPNamur, "_request", AsyncMock()) as request,
+        pytest.raises(ValueError, match="max_records"),
+    ):
+        await odp_namur_client.parking_snapshot(max_records=max_records)  # ty: ignore[invalid-argument-type]
+    request.assert_not_awaited()
+
+
+async def test_max_records_never_truncates(odp_namur_client: ODPNamur) -> None:
+    """A configured safety ceiling rejects the whole oversized selection."""
+    with (
+        patch.object(ODPNamur, "dataset_version", AsyncMock(return_value="version")),
+        patch.object(
+            ODPNamur,
+            "_request",
+            AsyncMock(return_value={"nhits": 2, "records": records(2)}),
+        ),
+        pytest.raises(ODPNamurResultsError, match="unsupported"),
+    ):
+        await odp_namur_client.parking_snapshot(ParkingType.PMR, max_records=1)
+
+
+async def test_max_records_boundary(odp_namur_client: ODPNamur) -> None:
+    """A selection exactly at the configured ceiling succeeds in full."""
+    with (
+        patch.object(ODPNamur, "dataset_version", AsyncMock(return_value="version")),
+        patch.object(
+            ODPNamur,
+            "_request",
+            AsyncMock(return_value={"nhits": 1, "records": records(1)}),
+        ),
+    ):
+        snapshot = await odp_namur_client.parking_snapshot(
+            ParkingType.PMR, max_records=1
+        )
+    assert len(snapshot.records) == snapshot.total_count == 1
+    assert snapshot.complete

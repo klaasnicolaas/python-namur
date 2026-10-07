@@ -162,13 +162,19 @@ class ODPNamur:
     async def parking_snapshot(
         self,
         parking_type: ParkingType = ParkingType.NORMAL,
+        *,
+        max_records: int = 10000,
     ) -> ParkingSnapshot:
-        """Fetch every selected parking record, rejecting incomplete or changing data.
+        """Fetch every selected record, rejecting observed collection inconsistencies.
 
         Opendatasoft record searches allow offsets up to 10,000 records. Larger
-        selections raise an error instead of returning a truncated snapshot.
+        selections or those above max_records raise instead of being truncated.
+        Processing revision checks do not provide a transactional source snapshot.
         The existing parking_spaces method remains available for capped requests.
         """
+        if type(max_records) is not int or not 0 < max_records <= 10000:
+            msg = "max_records must be an integer between 1 and 10000"
+            raise ValueError(msg)
         version = await self.dataset_version()
         results: list[ParkingSpot] = []
         identifiers: set[str] = set()
@@ -190,7 +196,7 @@ class ODPNamur:
             if (
                 type(count) is not int
                 or count < 0
-                or count > 10000
+                or count > max_records
                 or not isinstance(records, list)
             ):
                 msg = "Invalid or unsupported parking snapshot response"
@@ -227,7 +233,7 @@ class ODPNamur:
             records=results,
             total_count=total_count,
             pages_fetched=pages_fetched,
-            data_processed=version,
+            source_version=version,
         )
 
     async def close(self) -> None:

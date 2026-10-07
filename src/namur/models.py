@@ -74,10 +74,10 @@ class ParkingSpot:
 
 @dataclass
 class ParkingSnapshot:
-    """Complete parking records from one stable dataset version."""
+    """Complete selected records with source revision metadata."""
 
     records: list[ParkingSpot]
     total_count: int
     pages_fetched: int
-    data_processed: str
+    source_version: str | None
     complete: bool = True
