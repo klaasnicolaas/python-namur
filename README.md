@@ -86,7 +86,9 @@ from namur import ODPNamur, ParkingType
 async def main() -> None:
     """Show example on using the API of Namur."""
     async with ODPNamur() as client:
-        parkings = await client.parking_spaces(limit=10, parking_type=ParkingType.NORMAL)
+        parkings = await client.parking_spaces(
+            limit=10, parking_type=ParkingType.NORMAL
+        )
         print(parkings)
 
 
