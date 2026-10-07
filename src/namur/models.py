@@ -73,7 +73,7 @@ class ParkingSpot:
 
 
 @dataclass
-class ParkingSnapshot:
+class ParkingCollection:
     """Complete selected records with source revision metadata."""
 
     records: list[ParkingSpot]

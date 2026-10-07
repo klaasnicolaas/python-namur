@@ -17,7 +17,7 @@ from .exceptions import (
     ODPNamurError,
     ODPNamurResultsError,
 )
-from .models import ParkingSnapshot, ParkingSpot, ParkingType
+from .models import ParkingCollection, ParkingSpot, ParkingType
 
 VERSION = metadata.version("namur")
 
@@ -159,12 +159,12 @@ class ODPNamur:
             raise ODPNamurResultsError(msg)
         return version
 
-    async def parking_snapshot(
+    async def parking_collection(
         self,
         parking_type: ParkingType = ParkingType.NORMAL,
         *,
         max_records: int = 10000,
-    ) -> ParkingSnapshot:
+    ) -> ParkingCollection:
         """Fetch every selected record, rejecting observed collection inconsistencies.
 
         Opendatasoft record searches allow offsets up to 10,000 records. Larger
@@ -199,37 +199,37 @@ class ODPNamur:
                 or count > max_records
                 or not isinstance(records, list)
             ):
-                msg = "Invalid or unsupported parking snapshot response"
+                msg = "Invalid or unsupported parking collection response"
                 raise ODPNamurResultsError(msg)
             if total_count is None:
                 total_count = count
             if count != total_count:
-                msg = "Parking count changed during snapshot"
+                msg = "Parking count changed during collection"
                 raise ODPNamurResultsError(msg)
             if len(records) != min(100, total_count - len(results)):
-                msg = "Incomplete parking snapshot page"
+                msg = "Incomplete parking collection page"
                 raise ODPNamurResultsError(msg)
             for record in records:
                 try:
                     identifier = record["fields"]["identifiant"]
                     spot = ParkingSpot.from_json(record)
                 except (KeyError, TypeError, ValueError, IndexError) as exception:
-                    msg = "Invalid or duplicate parking record in snapshot"
+                    msg = "Invalid or duplicate parking record in collection"
                     raise ODPNamurResultsError(msg) from exception
                 if (
                     not isinstance(identifier, str)
                     or not identifier.strip()
                     or identifier in identifiers
                 ):
-                    msg = "Invalid or duplicate parking identifier in snapshot"
+                    msg = "Invalid or duplicate parking identifier in collection"
                     raise ODPNamurResultsError(msg)
                 identifiers.add(identifier)
                 results.append(spot)
             pages_fetched += 1
         if await self.dataset_version() != version:
-            msg = "Dataset changed during parking snapshot"
+            msg = "Dataset changed during parking collection"
             raise ODPNamurResultsError(msg)
-        return ParkingSnapshot(
+        return ParkingCollection(
             records=results,
             total_count=total_count,
             pages_fetched=pages_fetched,

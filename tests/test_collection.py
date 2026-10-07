@@ -1,4 +1,4 @@
-"""Complete snapshot collection and failure boundaries."""
+"""Complete parking collection and failure boundaries."""
 
 import json
 from copy import deepcopy
@@ -23,7 +23,7 @@ def records(count: int) -> list[dict]:
     return result
 
 
-async def test_complete_snapshot(odp_namur_client: ODPNamur) -> None:
+async def test_complete_collection(odp_namur_client: ODPNamur) -> None:
     """All pages, source restrictions and version metadata are retained."""
     data = records(201)
     with (
@@ -40,13 +40,13 @@ async def test_complete_snapshot(odp_namur_client: ODPNamur) -> None:
             ),
         ) as request,
     ):
-        snapshot = await odp_namur_client.parking_snapshot(ParkingType.PMR)
-    assert snapshot.complete
-    assert snapshot.total_count == len(snapshot.records) == 201
-    assert snapshot.pages_fetched == 3
-    assert snapshot.source_version == "version"
-    assert snapshot.records[0].source_attributes == data[0]["fields"]
-    assert snapshot.records[0].source_attributes["horaire"]
+        collection = await odp_namur_client.parking_collection(ParkingType.PMR)
+    assert collection.complete
+    assert collection.total_count == len(collection.records) == 201
+    assert collection.pages_fetched == 3
+    assert collection.source_version == "version"
+    assert collection.records[0].source_attributes == data[0]["fields"]
+    assert collection.records[0].source_attributes["horaire"]
     assert [call.kwargs["params"]["start"] for call in request.call_args_list] == [
         0,
         100,
@@ -70,18 +70,18 @@ async def test_complete_snapshot(odp_namur_client: ODPNamur) -> None:
         {"nhits": 1, "records": [{"fields": {"identifiant": "x"}}]},
     ],
 )
-async def test_invalid_snapshot(page: dict, odp_namur_client: ODPNamur) -> None:
+async def test_invalid_collection(page: dict, odp_namur_client: ODPNamur) -> None:
     """Unsupported counts, short pages and invalid identities fail closed."""
     with (
         patch.object(ODPNamur, "dataset_version", AsyncMock(return_value="version")),
         patch.object(ODPNamur, "_request", AsyncMock(return_value=page)),
         pytest.raises(ODPNamurResultsError),
     ):
-        await odp_namur_client.parking_snapshot(ParkingType.PMR)
+        await odp_namur_client.parking_collection(ParkingType.PMR)
 
 
 async def test_changed_count(odp_namur_client: ODPNamur) -> None:
-    """Count changes between pages cannot produce complete snapshots."""
+    """Count changes between pages cannot produce complete collections."""
     with (
         patch.object(ODPNamur, "dataset_version", AsyncMock(return_value="version")),
         patch.object(
@@ -96,7 +96,7 @@ async def test_changed_count(odp_namur_client: ODPNamur) -> None:
         ),
         pytest.raises(ODPNamurResultsError, match="count changed"),
     ):
-        await odp_namur_client.parking_snapshot(ParkingType.PMR)
+        await odp_namur_client.parking_collection(ParkingType.PMR)
 
 
 async def test_changed_version(odp_namur_client: ODPNamur) -> None:
@@ -108,7 +108,7 @@ async def test_changed_version(odp_namur_client: ODPNamur) -> None:
         ),
         pytest.raises(ODPNamurResultsError, match="Dataset changed"),
     ):
-        await odp_namur_client.parking_snapshot(ParkingType.PMR)
+        await odp_namur_client.parking_collection(ParkingType.PMR)
 
 
 @pytest.mark.parametrize(
@@ -145,20 +145,20 @@ async def test_metadata_endpoint(
     assert await odp_namur_client.dataset_version() == "version"
 
 
-async def test_empty_snapshot(odp_namur_client: ODPNamur) -> None:
-    """An empty selection is a complete successful snapshot."""
+async def test_empty_collection(odp_namur_client: ODPNamur) -> None:
+    """An empty selection is a complete successful collection."""
     with (
         patch.object(ODPNamur, "dataset_version", AsyncMock(return_value="version")),
         patch.object(
             ODPNamur, "_request", AsyncMock(return_value={"nhits": 0, "records": []})
         ),
     ):
-        snapshot = await odp_namur_client.parking_snapshot(ParkingType.PMR)
-    assert snapshot.records == []
-    assert snapshot.total_count == 0
-    assert snapshot.pages_fetched == 1
-    assert snapshot.source_version == "version"
-    assert snapshot.complete
+        collection = await odp_namur_client.parking_collection(ParkingType.PMR)
+    assert collection.records == []
+    assert collection.total_count == 0
+    assert collection.pages_fetched == 1
+    assert collection.source_version == "version"
+    assert collection.complete
 
 
 @pytest.mark.parametrize("max_records", [0, -1, True, False, 1.5, "10", None, 10001])
@@ -170,7 +170,7 @@ async def test_invalid_max_records(
         patch.object(ODPNamur, "_request", AsyncMock()) as request,
         pytest.raises(ValueError, match="max_records"),
     ):
-        await odp_namur_client.parking_snapshot(max_records=max_records)  # ty: ignore[invalid-argument-type]
+        await odp_namur_client.parking_collection(max_records=max_records)  # ty: ignore[invalid-argument-type]
     request.assert_not_awaited()
 
 
@@ -185,7 +185,7 @@ async def test_max_records_never_truncates(odp_namur_client: ODPNamur) -> None:
         ),
         pytest.raises(ODPNamurResultsError, match="unsupported"),
     ):
-        await odp_namur_client.parking_snapshot(ParkingType.PMR, max_records=1)
+        await odp_namur_client.parking_collection(ParkingType.PMR, max_records=1)
 
 
 async def test_max_records_boundary(odp_namur_client: ODPNamur) -> None:
@@ -198,8 +198,8 @@ async def test_max_records_boundary(odp_namur_client: ODPNamur) -> None:
             AsyncMock(return_value={"nhits": 1, "records": records(1)}),
         ),
     ):
-        snapshot = await odp_namur_client.parking_snapshot(
+        collection = await odp_namur_client.parking_collection(
             ParkingType.PMR, max_records=1
         )
-    assert len(snapshot.records) == snapshot.total_count == 1
-    assert snapshot.complete
+    assert len(collection.records) == collection.total_count == 1
+    assert collection.complete

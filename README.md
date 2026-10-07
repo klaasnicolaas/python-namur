@@ -96,18 +96,18 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-## Complete parking snapshots
+## Complete parking collections
 
-Use `parking_snapshot()` when a consumer needs the whole selected parking dataset. The existing `parking_spaces(limit=...)` method remains available for capped queries.
+Use `parking_collection()` when a consumer needs the whole selected parking dataset. The existing `parking_spaces(limit=...)` method remains available for capped queries.
 
 ```python
 async with ODPNamur() as client:
-    snapshot = await client.parking_snapshot(ParkingType.PMR, max_records=10000)
-    for record in snapshot.records:
+    collection = await client.parking_collection(ParkingType.PMR, max_records=10000)
+    for record in collection.records:
         print(record.spot_id, record.source_attributes)
 ```
 
-Every successful `ParkingSnapshot` uses the same result fields:
+Every successful `ParkingCollection` uses the same result fields:
 
 | Field | Type | Meaning |
 | :---- | :--- | :------ |
@@ -117,7 +117,7 @@ Every successful `ParkingSnapshot` uses the same result fields:
 | `source_version` | `str \| None` | Opaque source revision; Namur supplies its genuine `data_processed` timestamp |
 | `complete` | `bool` | Always `True` on success; failures raise an exception |
 
-The client checks page sizes, reported counts and nonblank unique original identifiers across every page. It compares the dataset processing revision before and after collection and retains original source fields in each record's `source_attributes`. A valid empty selection returns a complete snapshot with zero records. Source errors, missing revision metadata, changing counts or revisions, incomplete pages and invalid or duplicate records raise an exception instead of returning a partial snapshot.
+The client checks page sizes, reported counts and nonblank unique original identifiers across every page. It compares the dataset processing revision before and after collection and retains original source fields in each record's `source_attributes`. A valid empty selection returns a complete collection with zero records. Source errors, missing revision metadata, changing counts or revisions, incomplete pages and invalid or duplicate records raise an exception instead of returning a partial collection.
 
 `max_records` is a safety ceiling, never a truncation limit. It must be a positive integer (not a boolean) at most 10,000, matching the supported Opendatasoft search range. A larger selection raises `ODPNamurResultsError`; an invalid ceiling raises `ValueError` before any request.
 

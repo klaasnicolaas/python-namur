@@ -5,7 +5,7 @@ from .exceptions import (
     ODPNamurError,
     ODPNamurResultsError,
 )
-from .models import ParkingSnapshot, ParkingSpot, ParkingType
+from .models import ParkingCollection, ParkingSpot, ParkingType
 from .namur import ODPNamur
 
 __all__ = [
@@ -13,7 +13,7 @@ __all__ = [
     "ODPNamurConnectionError",
     "ODPNamurError",
     "ODPNamurResultsError",
-    "ParkingSnapshot",
+    "ParkingCollection",
     "ParkingSpot",
     "ParkingType",
 ]
