@@ -45,6 +45,8 @@ async def test_complete_collection(odp_namur_client: ODPNamur) -> None:
     assert collection.total_count == len(collection.records) == 201
     assert collection.pages_fetched == 3
     assert collection.source_version == "version"
+    assert collection.records[0].id == "0"
+    assert collection.records[-1].id == "200"
     assert collection.records[0].source_attributes == data[0]["fields"]
     assert collection.records[0].source_attributes["horaire"]
     assert [call.kwargs["params"]["start"] for call in request.call_args_list] == [
