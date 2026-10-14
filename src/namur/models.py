@@ -30,7 +30,7 @@ class ParkingType(enum.StrEnum):
 class ParkingSpot:
     """Object representing a parking spot."""
 
-    spot_id: str
+    id: str
     parking_type: str
     street: str
     longitude: float
@@ -56,7 +56,7 @@ class ParkingSpot:
         geo = data["geometry"]["coordinates"]
         return cls(
             source_attributes=dict(attr),
-            spot_id=attr.get("identifiant"),
+            id=attr.get("identifiant"),
             parking_type=attr.get("type_parking"),
             street=attr.get("rue_nom"),
             longitude=geo[0],

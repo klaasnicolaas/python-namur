@@ -66,7 +66,7 @@ You get the following output data back with this python package:
 
 | Variable | Type | Description |
 | :------- | :--- | :---------- |
-| `spot_id` | string | The id of the parking spot |
+| `id` | string | The id of the parking spot |
 | `parking_type` | string | The type of parking of the parking spot |
 | `street` | string | The street name where this parking spot is located |
 | `longitude` | float | The longitude of the parking spot |
@@ -104,7 +104,7 @@ Use `parking_collection()` when a consumer needs the whole selected parking data
 async with ODPNamur() as client:
     collection = await client.parking_collection(ParkingType.PMR, max_records=10000)
     for record in collection.records:
-        print(record.spot_id, record.source_attributes)
+        print(record.id, record.source_attributes)
 ```
 
 Every successful `ParkingCollection` uses the same result fields:
@@ -250,3 +250,7 @@ SOFTWARE.
 [prek]: https://github.com/j178/prek
 [scorecard-shield]: https://api.scorecard.dev/projects/github.com/klaasnicolaas/python-namur/badge
 [scorecard-url]: https://scorecard.dev/viewer/?uri=github.com/klaasnicolaas/python-namur
+
+## Record identity migration
+
+Replace `record.spot_id` with `record.id`, including constructor keywords. The identifier value and type, selection, geometry and original source claims are preserved. This public record API change requires a major release; no compatibility alias is introduced. The field `id` is valid as a Python dataclass attribute and does not replace the builtin `id()` function.
